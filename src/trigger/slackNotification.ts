@@ -86,7 +86,7 @@ export const slackNotificationTask = task({
         }
       };
     } catch (error) {
-      logger.error("Error sending Slack notification", { 
+      logger.error("Error sending Slack notification", {
         error: error.message,
       });
       return {

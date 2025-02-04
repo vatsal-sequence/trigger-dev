@@ -1,4 +1,4 @@
-import { batch, logger, task } from "@trigger.dev/sdk/v3";
+import { batch, logger, task, tasks } from "@trigger.dev/sdk/v3";
 import { audioExtractorTask } from "./audioExtractor";
 import { audioTranscriptionTask } from "./audioTranscription";
 import { voiceExtractorTask } from "./voiceExtractor";
@@ -14,6 +14,8 @@ export const mainProjectProcessingTask = task({
       if (!payload.videoUrl) {
         throw new Error('Video URL is required');
       }
+
+      // const jobStatus = await tasks.trigger("get-job-status", { });
 
       logger.info("Starting main project processing", { payload });
 
@@ -127,9 +129,9 @@ export const mainProjectProcessingTask = task({
 
       return response;
     } catch (error) {
-      logger.error("Main project processing failed", { 
+      logger.error("Main project processing failed", {
         error: error.message,
-        payload 
+        payload
       });
       return {
         success: false,

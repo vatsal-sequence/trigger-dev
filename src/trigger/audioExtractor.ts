@@ -37,7 +37,7 @@ export const audioExtractorTask = task({
       // Create temporary directory for processing
       tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'audio-extraction-'));
       logger.info("Audio extraction tempDir", { tempDir });
-      
+
       const videoPath = path.join(tempDir, 'video.mp4');
       const audioPath = path.join(tempDir, 'audio.mp3');
 
@@ -76,9 +76,9 @@ export const audioExtractorTask = task({
         }
       };
     } catch (error) {
-      logger.error("Error in audio extraction task", { 
+      logger.error("Error in audio extraction task", {
         error: error.message,
-        videoUrl: payload.videoUrl 
+        videoUrl: payload.videoUrl
       });
       return {
         success: false,

@@ -44,7 +44,7 @@ export const voiceExtractorTask = task({
         }
       };
     } catch (error) {
-      logger.error("Error in voice extraction task", { 
+      logger.error("Error in voice extraction task", {
         error: error.message,
       });
       return {

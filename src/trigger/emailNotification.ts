@@ -65,7 +65,7 @@ export const emailNotificationTask = task({
         }
       };
     } catch (error) {
-      logger.error("Error sending email notification", { 
+      logger.error("Error sending email notification", {
         error: error.message,
       });
       return {

@@ -51,22 +51,22 @@ export const audioTranscriptionTask = task({
         });
 
         audioBuffer = Buffer.from(response.data);
-        logger.info("Audio file downloaded successfully", { 
+        logger.info("Audio file downloaded successfully", {
           size: audioBuffer.length,
           contentType: response.headers['content-type']
         });
       } catch (error: any) {
-        const errorMessage = error.response 
+        const errorMessage = error.response
           ? `Failed to download audio: ${error.response.status} - ${error.response.statusText}`
           : `Failed to download audio: ${error.message}`;
-        
+
         logger.error("Audio download failed", {
           error: errorMessage,
           url: payload.audioUrl,
           status: error.response?.status,
           headers: error.response?.headers
         });
-        
+
         throw new Error(errorMessage);
       }
 
@@ -92,7 +92,7 @@ export const audioTranscriptionTask = task({
         }
       };
     } catch (error) {
-      logger.error("Error in audio transcription task", { 
+      logger.error("Error in audio transcription task", {
         error: error.message,
         audioUrl: payload.audioUrl
       });
@@ -125,9 +125,9 @@ async function transcribeAudio(audioBuffer: Buffer): Promise<string> {
     logger.info("Transcription completed successfully");
     return response.result?.results?.channels?.[0]?.alternatives?.[0]?.transcript || '';
   } catch (error) {
-    logger.error("Deepgram transcription error", { 
+    logger.error("Deepgram transcription error", {
       error: error.message,
-      errorType: error.constructor.name 
+      errorType: error.constructor.name
     });
     throw new Error(`Transcription failed: ${error.message}`);
   }
